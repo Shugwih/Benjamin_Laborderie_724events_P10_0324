@@ -12,9 +12,7 @@ const PER_PAGE = 9;
 const EventList = () => {
   const { data, error } = useData();
   const [type, setType] = useState();
-  console.log("Type selected:", type);
   const [currentPage, setCurrentPage] = useState(1);
-  console.log("Data available:", data?.events);
   const filteredEvents = (
     (!type
       ? data?.events 
@@ -27,9 +25,9 @@ const EventList = () => {
       return true;
     }
     return false;
-  }); console.log("Events after pagination filter:", filteredEvents);
+  });
   const changeType = (evtType) => {
-    console.log("Changing type to:", evtType);
+
     setCurrentPage(1);
     setType(evtType);
   };
