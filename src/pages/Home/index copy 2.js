@@ -15,18 +15,6 @@ import { useData } from "../../contexts/DataContext";
 const Page = () => {
   const { data } = useData();
   
-  const lastEvent =
-    data && data.events && data.events.length > 0
-      ? data.events.reduce((latest, current) => {
-          
-          const latestDate = new Date(latest.date);
-          const currentDate = new Date(current.date);
-
-          return currentDate > latestDate ? current : latest;
-        })
-      
-        : null;
-
   return ( <>
     <header>
       <Menu />
@@ -108,7 +96,7 @@ const Page = () => {
         <h2 className="Title">Contact</h2>
         <Modal
           Content={
-            <div className="ModalMessage--success" data-testid="success-message">
+            <div className="ModalMessage--success">
               <div>Message envoyé !</div>
               <p>
                 Merci pour votre message nous tâcherons de vous répondre dans
@@ -129,16 +117,15 @@ const Page = () => {
     <footer className="row">
       <div className="col presta">
         <h3>Notre derniére prestation</h3>
-        {lastEvent && (
-            <EventCard
-              imageSrc={lastEvent?.cover}
-              imageAlt={lastEvent?.description}
-              title={lastEvent?.title}
-              date={new Date(lastEvent?.date)}
-              small
-              label={lastEvent?.type}
-            />
-          )}
+        {data?.last?.cover && (
+      <EventCard
+        imageSrc={data.last.cover}
+        title={data.last.title}
+        date={new Date(data.last.date)}
+        small
+        label="boom"
+      />
+    )}
       </div>
       <div className="col contact">
         <h3>Contactez-nous</h3>
